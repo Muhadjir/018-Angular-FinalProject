@@ -1,0 +1,74 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="paymentDetailId" [value]="authService.payDet.paymentDetailId" />
+    <div class="form-group">
+        <label>Card Owner Name</label>
+        <input class="form-control form-control-lg" placeholder="Full Name"
+        name="cardOwnerName" #cardOwnerName="ngModel" [(ngModel)]="authService.payDet.cardOwnerName"
+        required maxlength="25" minlength="3" pattern="[a-zA-Z ]*"/>
+        <div *ngIf="cardOwnerName && cardOwnerName.invalid && cardOwnerName.touched" class="alert alert-danger">
+            <div *ngIf="cardOwnerName.errors?.required">
+                Card Owner Name harus diisi.
+            </div>
+            <div *ngIf="cardOwnerName.errors?.pattern">
+                Card Owner Name harus huruf alphabet.
+            </div>
+            <div *ngIf="cardOwnerName.errors?.minlength">
+                Card Owner Name minimal 3 Karakter.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Card Number</label>
+        <input class="form-control form-control-lg" placeholder="16 Digit Card"
+        name="cardNumber" #cardNumber="ngModel" [(ngModel)]="authService.payDet.cardNumber"
+        required maxlength="16" minlength="16" pattern="[0-9]*"/>
+        <div *ngIf="cardNumber && cardNumber.invalid && cardNumber.touched" class="alert alert-danger">
+            <div *ngIf="cardNumber.errors?.required">
+                Card Number harus diisi.
+            </div>
+            <div *ngIf="cardNumber.errors?.pattern">
+                Card Number harus angka.
+            </div>
+            <div *ngIf="cardNumber.errors?.minlength">
+                Card Number minimal 16 Angka.
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group col-md-6">
+            <label>Security Code</label>
+            <input type="password" class="form-control form-control-lg" placeholder="Security Code"
+            name="securityCode" #securityCode="ngModel" [(ngModel)]="authService.payDet.securityCode"
+            required maxlength="6" minlength="6" pattern="[0-9]*"/>
+            <div *ngIf="securityCode && securityCode.invalid && securityCode.touched" class="alert alert-danger">
+                <div *ngIf="securityCode.errors?.required">
+                    Security Code harus diisi.
+                </div>
+                <div *ngIf="securityCode.errors?.pattern">
+                    Security Code harus angka.
+                </div>
+                <div *ngIf="securityCode.errors?.minlength">
+                    Security Code minimal 16 Angka.
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Expiration Date</label>
+            <input class="form-control form-control-lg" placeholder="MM/YY"
+            name="expirationDate" #expirationDate="ngModel" [(ngModel)]="authService.payDet.expirationDate"
+            required maxlength="5" minlength="5"/>
+            <div *ngIf="expirationDate && expirationDate.invalid && expirationDate.touched" class="alert alert-danger">
+                <div *ngIf="expirationDate.errors?.required">
+                    Expiration Dateharus diisi.
+                </div>
+                <div *ngIf="expirationDate.errors?.minlength">
+                    Expiration Date minimal 5 Karakter.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+    
+</form>
