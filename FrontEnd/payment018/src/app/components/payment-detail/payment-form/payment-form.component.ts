@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./payment-form.component.css']
 })
 export class PaymentFormComponent implements OnInit {
-  seCode:boolean=false
   constructor(public authService:AuthService,
     private toastr: ToastrService) { }
 
@@ -26,7 +25,6 @@ export class PaymentFormComponent implements OnInit {
   }
 
   insert(form: NgForm) {
-    this.seCode=false
     this.authService.postData().subscribe(
       res => {
         this.resetForm(form);
@@ -38,7 +36,6 @@ export class PaymentFormComponent implements OnInit {
   }
 
   update(form: NgForm) {
-    this.seCode=true
     this.authService.putData().subscribe(
       res => {
         this.resetForm(form);
@@ -53,5 +50,6 @@ export class PaymentFormComponent implements OnInit {
   resetForm(form: NgForm) {
     form.form.reset();
     this.authService.payDet = {} as PaymentDetail;
+    location.reload()
   }
 }

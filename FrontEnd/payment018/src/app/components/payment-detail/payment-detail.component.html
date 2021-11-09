@@ -12,6 +12,7 @@
                     <th>Card Owner</th>
                     <th>Card Number</th>
                     <th>Exp. Date</th>
+                    <!-- <th>Status</th> -->
                     <th>Action</th>
                 </tr>
             </thead>
@@ -19,12 +20,35 @@
                 <tr *ngFor="let list of authService.list">
                     <td (click)="getForm(list)">{{list.cardOwnerName}}</td>
                     <td (click)="getForm(list)">{{list.cardNumber}}</td>
-                    <td (click)="getForm(list)">{{list.expirationDate}}</td>
+                    <td (click)="getForm(list)">{{list.expirationDate | date:"MMM YYYY"}}</td>
+                    <!-- <td (click)="getForm(list)" *ngIf="(list.expirationDate) < today.getTime().toString()">{{list.expirationDate | date:"MMM YYYY"}}</td> -->
                     <td>
                         <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(list.paymentDetailId, list.cardOwnerName)"></i>
                     </td>
                 </tr>
             </tbody>
+            <!-- <tbody>
+                <ng-container *ngFor="let list of authService.list">
+                    <tr *ngIf="(list?.expirationDate | date:'EEEE d MMMM') > (today | date:'EEEE d MMMM'); then notExpired else isExpired">
+                        <ng-template #notExpired [ngClass]="{'disabled': false}">
+                            <td (click)="getForm(list)">{{list.cardOwnerName}}</td>
+                            <td (click)="getForm(list)">{{list.cardNumber}}</td>
+                            <td (click)="getForm(list)">{{list.expirationDate | date:"MMM YYYY"}}</td>
+                            <td>
+                                <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(list.paymentDetailId, list.cardOwnerName)"></i>
+                            </td>
+                        </ng-template>
+                        <ng-template #isExpired [ngClass]="{'disabled': true}">
+                            <td (click)="getForm(list)">{{list.cardOwnerName}}</td>
+                            <td (click)="getForm(list)">{{list.cardNumber}}</td>
+                            <td (click)="getForm(list)">{{list.expirationDate | date:"MMM YYYY"}}</td>
+                            <td>
+                                <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(list.paymentDetailId, list.cardOwnerName)"></i>
+                            </td>
+                        </ng-template>
+                    </tr>
+                </ng-container>
+            </tbody> -->
         </table>
     </div>
   </div>

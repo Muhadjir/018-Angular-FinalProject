@@ -9,11 +9,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./payment-detail.component.css']
 })
 export class PaymentDetailComponent implements OnInit {
-
+today: Date;
   constructor(public authService:AuthService,
     private toastr: ToastrService) { }
   ngOnInit(): void {
     this.authService.refresh();
+    this.today = new Date()
   }
 
   getForm(selectedRecord: PaymentDetail) {

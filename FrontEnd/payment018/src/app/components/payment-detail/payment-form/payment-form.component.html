@@ -48,21 +48,18 @@
                     Security Code harus angka.
                 </div>
                 <div *ngIf="securityCode.errors?.minlength">
-                    Security Code minimal 16 Angka.
+                    Security Code minimal 6 Angka.
                 </div>
             </div>
         </div>
         <div class="form-group col-md-6">
             <label>Expiration Date</label>
-            <input class="form-control form-control-lg" placeholder="MM/YY"
+            <input type="month" class="form-control form-control-lg" placeholder="MM/YY"
             name="expirationDate" #expirationDate="ngModel" [(ngModel)]="authService.payDet.expirationDate"
-            required maxlength="5" minlength="5"/>
+            required />
             <div *ngIf="expirationDate && expirationDate.invalid && expirationDate.touched" class="alert alert-danger">
                 <div *ngIf="expirationDate.errors?.required">
-                    Expiration Dateharus diisi.
-                </div>
-                <div *ngIf="expirationDate.errors?.minlength">
-                    Expiration Date minimal 5 Karakter.
+                    Expiration Date harus diisi.
                 </div>
             </div>
         </div>
